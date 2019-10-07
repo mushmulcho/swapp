@@ -35,18 +35,7 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "cross-env CI=true lint-staged"
-    }
-  },
-  "lint-staged": {
-    "src/**/*.js": [
 
-      "npm test --bail --findRelatedTests",
-      "git add"
-    ]
-  },
   "prettier": {
     "trailingComma": "all",
     "tabWidth": 2,
