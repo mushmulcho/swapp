@@ -1,50 +1,85 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Card, Button, Image, Text, Flex } from 'rebass';
 import { Label, Input, Radio, Checkbox } from '@rebass/forms';
-import { themes } from './Themes';
+import { userBlank } from './userBlank';
+import SolidButton from './SolidButton';
+import InputField from './InputField';
+import {themes} from './Themes';
 
-const LoginPage = ({ theme, changeTheme }) => {
+const LoginPage = ({  theme, changeTheme, getUserData }) => {
+    const [userEmail, setUserEmail] = useState('');
+    const [userPass, setUserPass] = useState('');
+
+    const onTextInputChange = setter => ({ target: { value } }) =>
+        setter(value);
+
+    const onLoginButtonClick = () => {
+        const newUserData = userBlank();
+        //make Error messages if we don't have correct or provided data
+        newUserData.email = userEmail;
+        newUserData.pass = userPass;
+
+        getUserData(newUserData);
+    };
     return (
         <Card
             variant="primary"
-            width={[352, 602]}
+            width={[302, 502]}
             mx="auto"
             my={3}
             pt={3}
-            style={{ backgroundColor: themes[theme].backgorund }}
+            pb={3}
+            bg={themes.commonColors.black}
+            color={themes[theme].defaultFontColor}
         >
             <Flex alignItems="center" px={3}>
-                <Button
-                    variant="link"
+                <Text
                     onClick={() =>
                         changeTheme(theme === 'dark' ? 'light' : 'dark')
                     }
+                    bg={themes.commonColors.black}
+                    color={themes.commonColors.yellow}
+                    fontFamily="swFont"
+                    fontSize={[50, 100]}
+                    textAlign="center"
+                    width="100%"
+                    style={{ cursor: 'pointer' }}
                 >
-                    <Image src=""></Image>
-                </Button>
+                    {' '}
+                    SWAPP{' '}
+                </Text>
             </Flex>
-            <Box as="form" py={3} onSubmit={e => e.preventDefault()}>
-                <Box px={2} py={2}>
-                    <Label htmlFor="Email">Email</Label>
-                    <Input
-                        id="email"
+            <Box
+                as="form"
+                bg={themes[theme].defaultBackgorund}
+                mx={3}
+                px={2}
+                pb={3}
+                pt={[2, 4]}
+                display="grid"
+                onSubmit={e => e.preventDefault()}
+                style={{ borderRadius: '7px' }}
+            >
+                <Box px={[2, 5]}>
+                    <InputField
                         name="email"
-                        type="email"
-                        placeholder="az@sum.suncho"
-                    ></Input>
+                        theme={theme}
+                        onChange={onTextInputChange(setUserEmail)}
+                    />
                 </Box>
-                <Box px={2} py={2}>
-                    <Label htmlFor="Password">Password</Label>
-                    <Input id="pass" name="pass" type="password"></Input>
+                <Box px={[2, 5]} py={3}>
+                    <InputField
+                        name="password"
+                        theme={theme}
+                        onChange={onTextInputChange(setUserPass)}
+                    />
                 </Box>
-                <Box>
-                    <Label width={[1 / 2, 1 / 4]} p={2}>
-                        <Checkbox id="remember" name="remember" />
-                        Remember me
-                    </Label>
-                </Box>
-                <Box px={2} ml="auto">
-                    <Button>Login</Button>
+                <Box px={2} ml="auto" pr={[2, 5]}>
+                    <SolidButton
+                        onClick={onLoginButtonClick}
+                        text="Login"
+                        theme={theme}
+                    />
                 </Box>
             </Box>
         </Card>
