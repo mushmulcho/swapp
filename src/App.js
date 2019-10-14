@@ -1,23 +1,27 @@
-import React, { useState, useRef, useCallback, Suspense, lazy } from 'react';
-import { Box, Card, Button, Image, Heading, Text } from 'rebass';
+import React, { useState, useRef, Suspense, lazy } from 'react';
 import {
     BrowserRouter as Router,
     Route,
     Switch,
     Redirect,
 } from 'react-router-dom';
+import { Box } from 'rebass';
 import './App.css';
-import { ThemeContext } from './components/Themes';
-import { userBlank } from './components/userBlank';
+import { themes, ThemeContext } from './components/Themes';
+import { userBlank } from './utils/userBlank';
 
 const LoginPage = lazy(() => import('./components/Login'));
+const Episods = lazy(() => import('./components/Episodes'));
 
 const App = () => {
     const [theme, setTheme] = useState('dark');
     const [userData, setUserData] = useState(userBlank());
     console.log(userData);
     return (
-        <ThemeContext.Provider value={theme}>
+        <ThemeContext.Provider value={{ theme: theme, toggleTheme: setTheme }}>
+            <Box className="background" bg={themes[theme].defaultBackground}>
+                {' '}
+            </Box>
             <Router>
                 <Suspense fallback={<div>Loading...</div>}>
                     <Switch>
@@ -25,11 +29,13 @@ const App = () => {
                             path="/login"
                             render={() => (
                                 <LoginPage
-                                    theme={theme}
-                                    changeTheme={setTheme}
                                     getUserData={setUserData}
                                 ></LoginPage>
                             )}
+                        />
+                        <Route
+                            path="/episodes"
+                            render={() => <Episods></Episods>}
                         />
                         <Route
                             path="/"
@@ -39,7 +45,7 @@ const App = () => {
                                 ) : (
                                     <Redirect
                                         to={{
-                                            pathname: '/login',
+                                            pathname: '/episodes',
                                             state: { from: props.location },
                                         }}
                                     />

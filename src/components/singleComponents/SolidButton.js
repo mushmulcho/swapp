@@ -1,17 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button } from 'rebass';
-import { themes, ThemeContext } from './Themes';
+import { themes, ThemeContext } from '../Themes';
 
 const SolidButtons = props => {
-
     return (
         <ThemeContext.Consumer>
-            {theme => (
+            {({ theme }) => (
                 <Button
                     fontWeight="bold"
                     onClick={props.onClick}
                     color={themes[theme].solidButtons.fontColor}
-                    bg={themes[theme].solidButtons.backgorund}
+                    bg={themes[theme].solidButtons.background}
                 >
                     {props.text}
                 </Button>

@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Input } from '@rebass/forms';
 
-import { themes, ThemeContext } from './Themes';
+import { themes, ThemeContext } from '../Themes';
 const InputField = props => {
     return (
         <ThemeContext.Consumer>
-            {theme => (
+            {({ theme }) => (
                 <Input
                     name={props.name}
                     id={props.id || props.name}
@@ -14,6 +14,8 @@ const InputField = props => {
                     color={themes[theme].inputs.fontColor}
                     bg={themes[theme].inputs.background}
                     onChange={props.onChange}
+                    borderColor={themes[theme].inputs.borderColor}
+                    borderRadius="4px"
                 />
             )}
         </ThemeContext.Consumer>
