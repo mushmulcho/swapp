@@ -1,20 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { Heading } from 'rebass';
 import { themes, ThemeContext } from '../Themes';
 
-const ThemedHeading = ({ size, text }) => {
+const ThemedHeading = ({ text, style }) => {
+    const { theme } = useContext(ThemeContext);
     return (
-        <ThemeContext.Consumer>
-            {({ theme }) => (
-                <Heading
-                    fontSize={size}
-                    color={themes[theme].primaryHeading.fontColor}
-                    p={2}
-                >
-                    {text}
-                </Heading>
-            )}
-        </ThemeContext.Consumer>
+        <Heading
+            sx={style}
+            color={themes[theme].primaryHeading.fontColor}
+            fontWeight={800}
+        >
+            {text}
+        </Heading>
     );
+};
+ThemedHeading.propTypes = {
+    text: PropTypes.string.isRequired,
+    style: PropTypes.object,
+};
+ThemedHeading.defaultProps = {
+    style: {},
 };
 export default ThemedHeading;

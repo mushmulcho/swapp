@@ -28,13 +28,15 @@
     text-overflow: ellipsis;
     text-align: left;
 }
-.episodes-card {
+.card-border {
     border: 2px solid;
     border-radius: 5px;
-    width: 256px;
     display: inline-block;
 }
-.episodes-card:hover {
+.billboard {
+    width: 256px;
+}
+.billboard:hover {
     border-color: #4bd5ee;
 }
 

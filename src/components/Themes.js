@@ -9,6 +9,7 @@ export const themes = {
     light: {
         defaultBackground: '#E8EAED',
         defaultFontColor: '#4E5B6E',
+        secondDefaultFontColor: '#000',
         cards: {
             borderColor: '#E5E9F2',
             background: '#FFF',
@@ -45,6 +46,7 @@ export const themes = {
     dark: {
         defaultBackground: '#000',
         defaultFontColor: '#abb1ba',
+        secondDefaultFontColor: '#4BD5EE',
         cards: {
             borderColor: '#3C4858',
             background: '#333',

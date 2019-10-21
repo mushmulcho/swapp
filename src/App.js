@@ -12,6 +12,8 @@ import { userBlank } from './utils/userBlank';
 
 const LoginPage = lazy(() => import('./components/Login'));
 const Episods = lazy(() => import('./components/Episodes'));
+const Episod = lazy(() => import('./components/Episod'));
+const Characters = lazy(() => import('./components/Characters'));
 
 const App = () => {
     const [theme, setTheme] = useState('dark');
@@ -28,14 +30,14 @@ const App = () => {
                         <Route
                             path="/login"
                             render={() => (
-                                <LoginPage
-                                    getUserData={setUserData}
-                                ></LoginPage>
+                                <LoginPage getUserData={setUserData} />
                             )}
                         />
+                        <Route path="/episodes" render={() => <Episods />} />
+                        <Route path="/episode" render={() => <Episod />} />
                         <Route
-                            path="/episodes"
-                            render={() => <Episods></Episods>}
+                            path="/characters"
+                            render={() => <Characters />}
                         />
                         <Route
                             path="/"
@@ -45,7 +47,7 @@ const App = () => {
                                 ) : (
                                     <Redirect
                                         to={{
-                                            pathname: '/episodes',
+                                            pathname: '/characters',
                                             state: { from: props.location },
                                         }}
                                     />
