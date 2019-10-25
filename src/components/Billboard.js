@@ -31,9 +31,7 @@ const Billboard = ({ episod }) => {
     );
 };
 Billboard.propTypes = {
-    episod: PropTypes.object,
+    episod: PropTypes.object.isRequired,
 };
-Billboard.defaultProps = {
-    episod: {},
-};
+
 export default Billboard;

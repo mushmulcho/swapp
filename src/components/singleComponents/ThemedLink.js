@@ -8,6 +8,7 @@ const ThemedLink = ({ text, path, className, style }) => {
         <Link
             color={themes[theme].appBar.fontColor}
             fontWeight="bold"
+            fontSize={[1, 2]}
             px={1}
             variant="nav"
             href={path}
@@ -25,7 +26,7 @@ ThemedLink.propTypes = {
     style: PropTypes.object,
 };
 ThemedLink.defaultProps = {
-    test: '',
+    text: '',
     className: '',
     style: {},
 };

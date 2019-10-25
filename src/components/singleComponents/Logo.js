@@ -1,13 +1,22 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Text } from 'rebass';
-import { themes, ThemeContext } from '../Themes';
+import { themes } from '../Themes';
+import { connect } from 'react-redux';
+import { toggledThemes } from '../../constants/theme.constants';
+import Utils from '../../Utils';
 
-const Logo = ({ small }) => {
-    const { theme, toggleTheme } = useContext(ThemeContext);
+const Logo = ({ small, theme, onToggleTheme }) => {
+    //const { theme, toggleTheme } = useContext(ThemeContext);
     return (
         <Text
-            onClick={() => toggleTheme(theme === 'dark' ? 'light' : 'dark')}
+            onClick={() =>
+                onToggleTheme(
+                    theme === toggledThemes.DARK
+                        ? toggledThemes.LIGHT
+                        : toggledThemes.DARK,
+                )
+            }
             color={themes.commonColors.yellow}
             fontFamily="swFont"
             fontSize={small ? 20 : [50, 100]}
@@ -26,4 +35,8 @@ Logo.propTypes = {
 Logo.defaultProps = {
     small: true,
 };
-export default Logo;
+
+export default connect(
+    Utils.mapStateToProps,
+    Utils.mapDispatchToProps,
+)(Logo);

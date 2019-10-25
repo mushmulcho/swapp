@@ -24,10 +24,10 @@ const NavBar = () => {
         >
             <Logo small />
             <Box mx="auto" />
-            <ThemedLink path="/Episodes" text="Episodes" />
-            <ThemedLink path="/Characters" text="Characters" />
+            <ThemedLink path="/episodes" text="Episodes" />
+            <ThemedLink path="/characters" text="Characters" />
             <ThemedLink
-                path="/Login"
+                path="/login"
                 className="glyphicon glyphicon-log-out"
                 style={{ ...logoutStyle }}
             />
