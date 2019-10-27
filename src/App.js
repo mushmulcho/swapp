@@ -1,6 +1,6 @@
 import React, { useState, useRef, Suspense, lazy } from 'react';
 import {
-    BrowserRouter as Router,
+    Router,
     Route,
     Switch,
     Redirect,
@@ -13,13 +13,15 @@ import { themes, ThemeContext } from './components/Themes';
 import { userBlank } from './utils/userBlank';
 import Utils from './Utils';
 import { connect } from 'react-redux';
+import {history} from './history';
 
-const LoginPage = lazy(() => import('./components/Login'));
-const Episods = lazy(() => import('./components/Episodes'));
-const Episod = lazy(() => import('./components/Episod'));
-const Characters = lazy(() => import('./components/Characters'));
-const Character = lazy(() => import('./components/Character'));
-const Starships = lazy(() => import('./components/Starships'));
+import PrivateRoute from './components/PrivateRoute';
+const LoginPage = lazy(() => import('./pages/Login'));
+const Episodes = lazy(() => import('./pages/Episodes'));
+const Episod = lazy(() => import('./pages/Episod'));
+const Characters = lazy(() => import('./pages/Characters'));
+const Character = lazy(() => import('./pages/Character'));
+const Starships = lazy(() => import('./pages/Starships'));
 
 const App = ({ theme }) => {
     //const [theme, setTheme] = useState('dark');
@@ -30,38 +32,21 @@ const App = ({ theme }) => {
             <Box className="background" bg={themes[theme].defaultBackground}>
                 {' '}
             </Box>
-            <Router>
+            <Router history={history}>
                 <Suspense fallback={<div>Loading...</div>}>
                     <Switch>
+                        <PrivateRoute exact path='/episodes' component={<Episodes />}/>
                         <Route
                             path="/login"
                             render={() => (
                                 <LoginPage getUserData={setUserData} />
                             )}
                         />
-                        <Route path="/episodes" render={() => <Episods />} />
-                        <Route path="/episode" render={() => <Episod />} />
-                        <Route path="/character" render={() => <Character />} />
-                        <Route path="/starships" render={() => <Starships />} />
-                        <Route
-                            path="/characters"
-                            render={() => <Characters />}
-                        />
-                        <Route
-                            path="/"
-                            render={props =>
-                                false ? (
-                                    <div>Home</div>
-                                ) : (
-                                    <Redirect
-                                        to={{
-                                            pathname: '/characters',
-                                            state: { from: props.location },
-                                        }}
-                                    />
-                                )
-                            }
-                        />
+                        <Route path="/episode" component={Episod} />
+                        <Route path="/character" component={Character} />
+                        <Route path="/starships" component={Starships} />
+                        <Route path="/characters" component={Characters} />
+                        <Redirect from="*" to="/episodes" />
                     </Switch>
                 </Suspense>
             </Router>

@@ -1,4 +1,4 @@
-import { TOGGLE_THEME } from './constants/theme.constants';
+import { TOGGLE_THEME } from '../constants/theme.constants';
 
 export const rootReducer = (state, action) => {
     switch (action.type) {

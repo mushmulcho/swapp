@@ -1,10 +1,10 @@
 import React from 'react';
 import { Box } from 'rebass';
-import NavBar from './NavBar';
-import SolidButtons from './singleComponents/SolidButton';
-import EpisodCard from './EpisodComponents/EpisodCard';
-import EpisodTextBox from './EpisodComponents//EpisodTextBox';
-import EpisodCharacterBox from './EpisodComponents/EpisodCharacterBox';
+import NavBar from '../components/NavBar';
+import SolidButtons from '../components/singleComponents/SolidButton';
+import EpisodCard from '../components/EpisodComponents/EpisodCard';
+import EpisodTextBox from '../components/EpisodComponents/EpisodTextBox';
+import EpisodCharacterBox from '../components/EpisodComponents/EpisodCharacterBox';
 
 import testEpisodos from '../utils/testFileForEpisodes';
 

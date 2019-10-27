@@ -1,17 +1,22 @@
 import React, { useState, useContext } from 'react';
 import { Box, Card, Text, Flex } from 'rebass';
 import { userBlank } from '../utils/userBlank';
-import SolidButton from './singleComponents/SolidButton';
-import InputField from './singleComponents/InputField';
-import { themes, ThemeContext } from './Themes';
-import Logo from './singleComponents/Logo';
+import SolidButton from '../components/singleComponents/SolidButton';
+import InputField from '../components/singleComponents/InputField';
+import { themes, ThemeContext } from '../components/Themes';
+import Logo from '../components/singleComponents/Logo';
+import { connect } from 'react-redux';
+import {history} from '../history';
+import {alertAction} from '../actions';
 
-const LoginPage = ({ getUserData }) => {
+const LoginPage = ({ getUserData,clearAlerts, alert }) => {
     const { theme } = useContext(ThemeContext);
     const [userEmail, setUserEmail] = useState('');
     const [userPass, setUserPass] = useState('');
     const [isAuthorized, setIsAuthorized] = useState(false);
     const [failedToFetch, setFailedToFetch] = useState(false);
+    
+
 
     const onTextInputChange = setter => ({ target: { value } }) =>
         setter(value);
@@ -28,6 +33,9 @@ const LoginPage = ({ getUserData }) => {
         }
         getUserData(newUserData);
     };
+    history.listen((location, action)=>{
+        clearAlerts();
+    })
     return (
         <Card
             variant="primary"
@@ -52,11 +60,8 @@ const LoginPage = ({ getUserData }) => {
                 sx={{ borderRadius: '7px' }}
             >
                 <Box px={[2, 5]} pb={2}>
-                    {isAuthorized && (
-                        <Text className="invalid">Invalid credentials!</Text>
-                    )}
-                    {failedToFetch && (
-                        <Text className="failedToFetch">Failed to fetch</Text>
+                    {alert && alert.message && (
+                        <Text className={alert.type}>{alert.message}</Text>
                     )}
                 </Box>
                 <Box px={[2, 5]}>
@@ -78,5 +83,12 @@ const LoginPage = ({ getUserData }) => {
         </Card>
     );
 };
+const mapState = state=> {
+    const { alert } = state;
+    return { alert };
+}
 
-export default LoginPage;
+const actionCreators = {
+    clearAlerts: alertAction.clear
+};
+export default connect(mapState,actionCreators)(LoginPage);

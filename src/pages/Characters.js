@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { Box } from 'rebass';
-import { themes, ThemeContext } from './Themes';
-import NavBar from './NavBar';
-import CardBlank from './singleComponents/CardBlank';
-import SolidButtons from './singleComponents/SolidButton';
-import EpisodCharacterBox from './EpisodComponents/EpisodCharacterBox';
+import { themes, ThemeContext } from '../components/Themes';
+import NavBar from '../components/NavBar';
+import CardBlank from '../components/singleComponents/CardBlank';
+import SolidButtons from '../components/singleComponents/SolidButton';
+import EpisodCharacterBox from '../components/EpisodComponents/EpisodCharacterBox';
 
 const Characters = ({}) => {
     const { theme } = useContext(ThemeContext);

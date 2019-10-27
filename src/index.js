@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { rootReducer } from './Reducers';
+import { rootReducer } from './reducers/Reducers';
 import { toggledThemes } from './constants/theme.constants';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
