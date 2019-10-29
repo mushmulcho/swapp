@@ -4,10 +4,10 @@
 .swFont {
     font-family: 'swFont';
 }
-.invalid {
+.red {
     color: red;
 }
-.failedToFetch {
+.orange {
     color: orange;
 }
 .background {

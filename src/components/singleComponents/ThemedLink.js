@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'rebass';
-import { themes, ThemeContext } from '../Themes';
+import { themes, ThemeContext } from '../../Themes';
 const ThemedLink = ({ text, path, className, style }) => {
     const { theme } = useContext(ThemeContext);
     return (

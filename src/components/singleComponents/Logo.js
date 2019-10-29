@@ -1,32 +1,37 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Text } from 'rebass';
-import { themes } from '../Themes';
-import { connect } from 'react-redux';
+import { themes, ThemeContext } from '../../Themes';
 import { toggledThemes } from '../../constants/theme.constants';
-import Utils from '../../Utils';
 
-const Logo = ({ small, theme, onToggleTheme }) => {
-    //const { theme, toggleTheme } = useContext(ThemeContext);
+const Logo = ({ small }) => {
+    const { theme, toggleTheme } = useContext(ThemeContext);
+
+    const onLogoClick = () => {
+        const newTheme =
+            theme === toggledThemes.DARK
+                ? toggledThemes.LIGHT
+                : toggledThemes.DARK;
+        localStorage.setItem('theme', newTheme);
+        toggleTheme(newTheme);
+    };
     return (
-        <Text
-            onClick={() =>
-                onToggleTheme(
-                    theme === toggledThemes.DARK
-                        ? toggledThemes.LIGHT
-                        : toggledThemes.DARK,
-                )
-            }
-            color={themes.commonColors.yellow}
-            fontFamily="swFont"
-            fontSize={small ? 20 : [50, 100]}
-            textAlign={small ? 'left' : 'center'}
-            width={small ? 'auto' : '100%'}
-            style={{ cursor: 'pointer' }}
-        >
-            {' '}
-            SWAPP{' '}
-        </Text>
+        <ThemeContext.Consumer>
+            {() => (
+                <Text
+                    onClick={onLogoClick}
+                    color={themes.commonColors.yellow}
+                    fontFamily="swFont"
+                    fontSize={small ? 20 : [50, 100]}
+                    textAlign={small ? 'left' : 'center'}
+                    width={small ? 'auto' : '100%'}
+                    style={{ cursor: 'pointer' }}
+                >
+                    {' '}
+                    SWAPP{' '}
+                </Text>
+            )}
+        </ThemeContext.Consumer>
     );
 };
 Logo.propTypes = {
@@ -36,7 +41,4 @@ Logo.defaultProps = {
     small: true,
 };
 
-export default connect(
-    Utils.mapStateToProps,
-    Utils.mapDispatchToProps,
-)(Logo);
+export default Logo;

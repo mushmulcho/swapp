@@ -1,19 +1,14 @@
 import React, { useContext } from 'react';
 import { Flex, Box } from 'rebass';
-import { themes, ThemeContext } from './Themes';
+import { themes, ThemeContext } from '../Themes';
 import Logo from './singleComponents/Logo';
 import ThemedLink from './singleComponents/ThemedLink';
 
+import LogoutButton from './singleComponents/LogoutButton';
+
 const NavBar = () => {
     const { theme } = useContext(ThemeContext);
-    const logoutStyle = {
-        border: '1px',
-        borderStyle: 'solid',
-        borderColor: themes[theme].outlineButtons.borderColor,
-        borderRadius: '5px',
-        p: 1,
-        bg: themes[theme].outlineButtons.background,
-    };
+
     return (
         <Flex
             px={2}
@@ -26,11 +21,7 @@ const NavBar = () => {
             <Box mx="auto" />
             <ThemedLink path="/episodes" text="Episodes" />
             <ThemedLink path="/characters" text="Characters" />
-            <ThemedLink
-                path="/login"
-                className="glyphicon glyphicon-log-out"
-                style={{ ...logoutStyle }}
-            />
+            <LogoutButton path="/login" />
         </Flex>
     );
 };

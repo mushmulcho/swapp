@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Heading } from 'rebass';
-import { themes, ThemeContext } from '../Themes';
+import { themes, ThemeContext } from '../../Themes';
 
 const ThemedHeading = ({ text, style }) => {
     const { theme } = useContext(ThemeContext);

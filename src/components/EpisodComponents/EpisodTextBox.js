@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Box, Text } from 'rebass';
-import { themes, ThemeContext } from '../Themes';
+import { themes, ThemeContext } from '../../Themes';
 import NormalText from '../singleComponents/NormalText';
 import CardBlank from '../singleComponents/CardBlank';
 import ThemedHeading from '../singleComponents/ThemedHeading';

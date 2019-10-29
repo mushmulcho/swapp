@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Input } from '@rebass/forms';
-import { themes, ThemeContext } from '../Themes';
+import { themes, ThemeContext } from '../../Themes';
 
 const InputField = props => {
     const { theme } = useContext(ThemeContext);

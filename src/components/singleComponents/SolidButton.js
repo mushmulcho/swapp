@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'rebass';
-import { themes, ThemeContext } from '../Themes';
+import { themes, ThemeContext } from '../../Themes';
 
 const SolidButtons = ({ text, onClick, style }) => {
     const { theme } = useContext(ThemeContext);

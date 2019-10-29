@@ -1,41 +1,48 @@
 import React, { useState, useContext } from 'react';
 import { Box, Card, Text, Flex } from 'rebass';
-import { userBlank } from '../utils/userBlank';
 import SolidButton from '../components/singleComponents/SolidButton';
 import InputField from '../components/singleComponents/InputField';
-import { themes, ThemeContext } from '../components/Themes';
+import { themes, ThemeContext } from '../Themes';
 import Logo from '../components/singleComponents/Logo';
-import { connect } from 'react-redux';
-import {history} from '../history';
-import {alertAction} from '../actions';
 
-const LoginPage = ({ getUserData,clearAlerts, alert }) => {
+import { LOG_IN } from '../querys';
+import { useApolloClient, useMutation } from '@apollo/react-hooks';
+import { loginConstants } from '../constants/login.constants';
+
+const LoginPage = () => {
     const { theme } = useContext(ThemeContext);
     const [userEmail, setUserEmail] = useState('');
     const [userPass, setUserPass] = useState('');
-    const [isAuthorized, setIsAuthorized] = useState(false);
-    const [failedToFetch, setFailedToFetch] = useState(false);
-    
-
+    const [invalidCredentials, setInvalidCredentials] = useState(false);
 
     const onTextInputChange = setter => ({ target: { value } }) =>
         setter(value);
 
+    const client = useApolloClient();
+    const [login, { error }] = useMutation(LOG_IN, {
+        onCompleted: ({ signIn: loginData }) => {
+            console.log('loginData',loginData);//TODO : DELETE
+            const user = {
+                user:userEmail,
+                token: loginData.token
+            }
+            localStorage.setItem('user', JSON.stringify(user));
+            client.writeData({ data: { authenicated: true } });
+            window.location.reload();
+        },
+    });
+
+    // if (error)  return<p>{loginConstants.FAILED_TO_FETCH}</p>
+
     const onLoginButtonClick = () => {
-        const newUserData = userBlank();
-        //todo: make Error messages if we don't have correct or provided data
-        //this is for test, don't forget to make it right
-        if (userEmail === 'az@sym.syncho' && userPass === 'asd') {
-            newUserData.email = userEmail;
-            newUserData.pass = userPass;
-            setIsAuthorized(true);
-            setFailedToFetch(true);
+        setInvalidCredentials(false);
+        if (userEmail === '' || userPass === '') {
+            setInvalidCredentials(true);
+            return;
         }
-        getUserData(newUserData);
+        login({ variables: { email: userEmail, password: userPass } });
     };
-    history.listen((location, action)=>{
-        clearAlerts();
-    })
+
     return (
         <Card
             variant="primary"
@@ -60,9 +67,13 @@ const LoginPage = ({ getUserData,clearAlerts, alert }) => {
                 sx={{ borderRadius: '7px' }}
             >
                 <Box px={[2, 5]} pb={2}>
-                    {alert && alert.message && (
-                        <Text className={alert.type}>{alert.message}</Text>
-                    )}
+                    {
+                        <Text color={'orange'}>
+                            {(invalidCredentials &&
+                                loginConstants.INVALID_CREDENTIALS) ||
+                                (error && loginConstants.FAILED_TO_FETCH)}
+                        </Text>
+                    }
                 </Box>
                 <Box px={[2, 5]}>
                     <InputField
@@ -83,12 +94,4 @@ const LoginPage = ({ getUserData,clearAlerts, alert }) => {
         </Card>
     );
 };
-const mapState = state=> {
-    const { alert } = state;
-    return { alert };
-}
-
-const actionCreators = {
-    clearAlerts: alertAction.clear
-};
-export default connect(mapState,actionCreators)(LoginPage);
+export default LoginPage;

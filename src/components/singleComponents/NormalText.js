@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Text } from 'rebass';
-import { themes, ThemeContext } from '../Themes';
+import { themes, ThemeContext } from '../../Themes';
 
 const NormalText = ({ text, className, style }) => {
     const { theme } = useContext(ThemeContext);

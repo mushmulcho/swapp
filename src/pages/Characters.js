@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Box } from 'rebass';
-import { themes, ThemeContext } from '../components/Themes';
+import { themes, ThemeContext } from '../Themes';
 import NavBar from '../components/NavBar';
 import CardBlank from '../components/singleComponents/CardBlank';
 import SolidButtons from '../components/singleComponents/SolidButton';
