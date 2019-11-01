@@ -9,20 +9,19 @@ import { uris } from '../constants/uri.constants';
 const httpLink = createHttpLink({
     uri: uris.GRAPHQL_SERVER,
 });
-
 const cache = new InMemoryCache();
 const client = new ApolloClient({
     link: authLink.concat(httpLink),
     cache,
     typeDefs,
 });
-const getToken = () =>{
-    const user = JSON.parse(localStorage.getItem('user')) || {};
-    if(user.token)
-        return true;
 
-    return false
-}
+const getToken = () => {
+    const user = JSON.parse(localStorage.getItem('user')) || {};
+    if (user.token) return true;
+
+    return false;
+};
 cache.writeData({
     data: {
         authenticated: getToken(),

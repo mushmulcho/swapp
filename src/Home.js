@@ -12,12 +12,10 @@ const Home = () => {
     const themeQuery = useQuery(THEMED_QUERY).data;
     const [theme, setTheme] = useState(themeQuery.theme);
 
-    console.log('authQuery', authQuery); //TODO : DELETE
+    document.body.style.backgroundColor = themes[theme].defaultBackground;
     return (
         <ThemeContext.Provider value={{ theme, toggleTheme: setTheme }}>
-            <Box className="background" bg={themes[theme].defaultBackground}>
-                {authQuery.authenticated ? <Pages /> : <LoginPage />}
-            </Box>
+            <Box>{authQuery.authenticated ? <Pages /> : <LoginPage />}</Box>
         </ThemeContext.Provider>
     );
 };

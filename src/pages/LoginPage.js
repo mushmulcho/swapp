@@ -21,11 +21,12 @@ const LoginPage = () => {
     const client = useApolloClient();
     const [login, { error }] = useMutation(LOG_IN, {
         onCompleted: ({ signIn: loginData }) => {
-            console.log('loginData',loginData);//TODO : DELETE
+            console.log('loginData', loginData); //TODO : DELETE
             const user = {
-                user:userEmail,
-                token: loginData.token
-            }
+                user: userEmail,
+                password: userPass,
+                token: loginData.token,
+            };
             localStorage.setItem('user', JSON.stringify(user));
             client.writeData({ data: { authenicated: true } });
             window.location.reload();

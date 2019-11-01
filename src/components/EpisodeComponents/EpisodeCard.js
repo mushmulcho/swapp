@@ -6,31 +6,31 @@ import { themes, ThemeContext } from '../../Themes';
 import ThemedHeading from '../singleComponents/ThemedHeading';
 import CardBlank from '../singleComponents/CardBlank';
 
-const EpisodCard = ({ body }) => {
+const EpisodеCard = ({ episode }) => {
     const { theme } = useContext(ThemeContext);
 
     return (
         <CardBlank
             className="themedCard"
-            style={{ display: 'block', height: [154, 200] }}
+            style={{ display: 'block', height: [154, 236] }}
             children={
                 <>
                     <Image
-                        width={[120, 176]}
-                        height={[150, 195]}
-                        src={body.src}
+                        width={[150, 232]}
+                        height={[150, 232]}
+                        src={episode.image}
                         sx={{ float: 'left' }}
                     />
                     <Card sx={{ textAlign: 'center' }}>
                         <ThemedHeading
-                            style={{ fontSize: [3, 4], pt: [4, 5] }}
-                            text={body.name}
+                            style={{ fontSize: [3, 4], pt: [52, 88] }}
+                            text={`Star Wars: Episode ` + episode.episodeId}
                         />
                         <Text
                             color={themes[theme].secondDefaultFontColor}
                             sx={{ fontSize: [2, 3], fontWeight: 800 }}
                         >
-                            bodysecondName
+                            {episode.title}
                         </Text>
                     </Card>
                 </>
@@ -38,10 +38,10 @@ const EpisodCard = ({ body }) => {
         ></CardBlank>
     );
 };
-EpisodCard.propTypes = {
-    body: PropTypes.object,
+EpisodеCard.propTypes = {
+    episode: PropTypes.object,
 };
-EpisodCard.defaultProps = {
-    body: {},
+EpisodеCard.defaultProps = {
+    episode: {},
 };
-export default EpisodCard;
+export default EpisodеCard;

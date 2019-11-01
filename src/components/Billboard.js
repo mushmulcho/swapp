@@ -4,34 +4,50 @@ import { Image } from 'rebass';
 import ThemedHeading from './singleComponents/ThemedHeading';
 import NormalText from './singleComponents/NormalText';
 import CardBlank from './singleComponents/CardBlank';
+import styled from '@emotion/styled';
+import LinkTo from '../components/singleComponents/LinkTo';
 
-const Billboard = ({ episod }) => {
+const Billboard = ({ episode }) => {
+    const StyledCardBlank = styled(CardBlank)`
+        width: 300px;
+    `;
+    const StyledNormalText = styled(NormalText)`
+        padding: 14px;
+    `;
     return (
-        <CardBlank
-            className="billboard"
+        <StyledCardBlank
+            hover
             children={
-                <>
-                    <Image width={256} height={345} src={episod.src} />
-                    <ThemedHeading
-                        style={{
-                            fontSize: 4,
-                            padding: '8px',
-                            textAlign: 'left',
-                            height: '54px',
-                        }}
-                        text={episod.name}
-                    />
-                    <NormalText
-                        className="episodes-card-text"
-                        text={episod.info}
-                    />
-                </>
+                <LinkTo
+                    to={`/episodes/${episode.id}`}
+                    children={
+                        <>
+                            <Image src={episode.image} />
+                            <ThemedHeading
+                                style={{
+                                    fontSize: 5,
+                                    padding: '16px',
+                                    textAlign: 'left',
+                                    height: '54px',
+                                    marginTop: '10px',
+                                    marginBottom: '10px',
+                                    lineHeight: '24px',
+                                }}
+                                text={episode.title}
+                            />
+                            <StyledNormalText
+                                className="episodes-card-text"
+                                text={episode.openingCrawl}
+                            />
+                        </>
+                    }
+                />
             }
-        ></CardBlank>
+        ></StyledCardBlank>
     );
 };
 Billboard.propTypes = {
-    episod: PropTypes.object.isRequired,
+    episode: PropTypes.object.isRequired,
 };
 
 export default Billboard;
