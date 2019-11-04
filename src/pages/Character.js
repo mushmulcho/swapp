@@ -21,7 +21,7 @@ const Character = () => {
     if (loading) return <Loading />;
     if (error) return <Error text={`Failed to load ${personId}`} />;
     const {
-        person: {name, starships },
+        person: { name, starships },
     } = data;
 
     return (

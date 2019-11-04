@@ -10,7 +10,6 @@ import { ALL_PEOPLE_QUERY } from '../querys';
 import { Tiles } from '@rebass/layout';
 
 const Characters = () => {
-
     const { data, loading, error, fetchMore } = useQuery(ALL_PEOPLE_QUERY, {
         variables: { first: 12 },
     });

@@ -73,7 +73,5 @@ const StarshipRadar = ({ starship }) => {
 StarshipRadar.propTypes = {
     starship: PropTypes.object.isRequired,
 };
-StarshipRadar.defaultProps = {
-
-};
+StarshipRadar.defaultProps = {};
 export default StarshipRadar;

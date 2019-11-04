@@ -5,7 +5,6 @@ import TwoColorInlineText from '../TwoColorInlineText';
 import BigImageCard from '../BigImageCard';
 
 const StarshipCard = ({ starship }) => {
-
     return (
         <BigImageCard
             name={starship.name}
@@ -40,7 +39,5 @@ const StarshipCard = ({ starship }) => {
 StarshipCard.propTypes = {
     starship: PropTypes.object.isRequired,
 };
-StarshipCard.defaultProps = {
-
-};
+StarshipCard.defaultProps = {};
 export default StarshipCard;
