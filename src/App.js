@@ -1,26 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import './App.css';
+import './fonts/SWFont.css';
+
+import { themes } from './Themes';
+import { ApolloProvider } from '@apollo/react-hooks';
+import client from './client';
+import { ThemeProvider } from 'emotion-theming';
+import Home from './Home';
+
+const App = () => {
+    return (
+        <ApolloProvider client={client}>
+            <BrowserRouter>
+                <ThemeProvider theme={themes}>
+                    <Home />
+                </ThemeProvider>
+            </BrowserRouter>
+        </ApolloProvider>
+    );
+};
 
 export default App;
