@@ -26,7 +26,7 @@
     "react-icons": "^3.8.0",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.2.0",
+    "react-scripts": "5.0.1",
     "react-svg-radar-chart": "^1.2.0",
     "rebass": "^4.0.6",
     "redux": "^4.0.4",
@@ -94,7 +94,7 @@
     "cross-env": "^6.0.3",
     "graphql-tag.macro": "^2.0.1",
     "husky": "^3.0.8",
-    "jest": "^24.9.0",
+    "jest": "^30.2.0",
     "lint-staged": "^10.0.0-0",
     "prettier": "1.18.2"
   }
